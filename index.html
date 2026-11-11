@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>数 · Números, edades y fechas</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f1e3;--card:#fffaf0;--ink:#2b2220;--red:#c1272d;--mut:#7a6a5f;--ok:#2e7d4f;--bad:#b3261e;--line:#e3d6bd;--blue:#2a5d8f;--warn:#b86e00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1716;--card:#2a2120;--ink:#f3e9d8;--mut:#b5a595;--line:#43352f;--red:#e0545a;--blue:#7fb2e5;--warn:#f0a63c}}
+:root[data-theme="dark"]{--bg:#1d1716;--card:#2a2120;--ink:#f3e9d8;--mut:#b5a595;--line:#43352f;--red:#e0545a;--blue:#7fb2e5;--warn:#f0a63c}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif}
+header{text-align:center;padding:30px 16px 6px}
+.sun{width:60px;height:60px;border-radius:50%;background:var(--red);margin:0 auto 8px;display:grid;place-items:center;color:#fff;font-size:32px;font-weight:700}
+h1{margin:0;font-size:1.8rem;letter-spacing:.12em}header p{margin:4px 0 0;color:var(--mut)}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:8px 12px;max-width:900px;margin:auto}
+button{font:inherit;cursor:pointer}
+.f{border:1.5px solid var(--red);background:var(--card);color:var(--red);padding:6px 13px;border-radius:999px}
+.f.on{background:var(--red);color:#fff}
+.sc{border-radius:8px;border-width:2px;font-weight:700;padding:8px 14px}
+.q{display:block;margin:6px auto 8px;background:var(--ink);color:var(--bg);border:0;padding:10px 22px;border-radius:8px;font-weight:700}
+.cnt{text-align:center;color:var(--mut);font-size:.9rem}
+#pat{max-width:760px;margin:10px auto;padding:10px 14px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:8px;font-size:.92rem;line-height:1.5}
+#pat b{color:var(--blue)}#pat .w{color:var(--warn)}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;max-width:1100px;margin:16px auto;padding:0 16px 40px}
+.c{perspective:900px;height:340px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.fl .in{transform:rotateY(180deg)}
+.s{position:absolute;inset:0;backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--red);border-radius:10px;box-shadow:0 3px 10px #0002;padding:12px;overflow:auto}
+.c.w .s{border-top-color:var(--warn)}
+.fr{display:grid;place-items:center;text-align:center}
+.fr b{font-size:3rem;font-weight:400;line-height:1.1;display:block}
+.fr .h{font-family:'Noto Sans JP',sans-serif;font-size:1.25rem;color:var(--red);margin-top:8px}
+.fr small{color:var(--mut);display:block;margin-top:8px;font-size:1.02rem}
+.bd{display:inline-block;margin-top:8px;font-size:.72rem;color:var(--warn);border:1px solid var(--warn);border-radius:999px;padding:1px 9px}
+.bk{transform:rotateY(180deg);font-size:.88rem;line-height:1.4}
+.bk p{margin:6px 0}.bk i{color:var(--mut)}
+.jp{font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif}
+.lb{font-size:.68rem;color:var(--red);font-weight:700;letter-spacing:.05em}
+.ex{font-size:1.05rem;line-height:1.5;font-weight:500}
+#quiz{max-width:560px;margin:20px auto 40px;padding:24px 16px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:12px}
+#quiz .big{font-size:3.6rem;line-height:1.2;color:var(--red)}
+.o{display:block;width:100%;margin:8px 0;padding:11px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.o.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.o.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.msg{min-height:28px;font-weight:700}
+[hidden]{display:none!important}
+
+.sc{padding:7px 12px;font-size:.92rem}
+#ctor,#cmp{max-width:900px;margin:12px auto;padding:0 16px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:end;justify-content:center}
+.row label{font-size:.85rem;color:var(--mut)}.row input{display:block;width:90px;padding:7px;border:1.5px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+.out{text-align:center;margin-top:12px;line-height:1.5}.out .big{font-size:2rem;color:var(--red)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{border:1px solid var(--line);padding:6px 8px;text-align:left}th{background:var(--bg);color:var(--red)}
+.tw{overflow-x:auto}td.x{color:var(--warn);font-weight:700}h3{margin:6px 0 8px;color:var(--red)}
+</style></head><body>
+<header><div class="sun">数</div><h1>数・歳・日付 · NÚMEROS, EDADES Y FECHAS</h1><p>Patrones, casos borde, comparaciones y quizes</p></header>
+<div id="home"><nav id="sn"></nav><nav id="nav"></nav><button class="q" id="qb"></button><div class="cnt" id="cnt"></div><div id="pat"></div>
+<div id="ctor" hidden><div class="box"><div class="row"><label>Año<input type="number" id="cy" min="1000" max="2999"></label><label>Mes<input type="number" id="cm" min="1" max="12"></label><label>Día<input type="number" id="cd" min="1" max="31"></label><button class="f" id="ct">Hoy</button></div><div class="out" id="cout"></div></div></div>
+<div id="cmp" hidden></div><div id="grid"></div></div>
+<div id="quiz" hidden></div>
+<script>
+const dg=["","いち","に","さん","よん","ご","ろく","なな","はち","きゅう"],kd="零一二三四五六七八九";
+const th={1:"せん",3:"さんぜん",8:"はっせん"},hu={1:"ひゃく",3:"さんびゃく",6:"ろっぴゃく",8:"はっぴゃく"};
+const k4=(n,s="")=>{const a=n/1000|0,b=(n/100|0)%10,c=(n/10|0)%10,d=n%10;return[a?th[a]||dg[a]+"せん":"",b?hu[b]||dg[b]+"ひゃく":"",c?(c>1?dg[c]:"")+"じゅう":"",dg[d]].filter(Boolean).join(s)};
+const kn=(n,s="")=>{if(!n)return"ぜろ";const o=n/1e8|0,m=(n/1e4|0)%1e4,r=n%1e4;return[o?k4(o,s)+"おく":"",m?k4(m,s)+"まん":"",k4(r,s)].filter(Boolean).join(s)};
+const j4=n=>{const a=n/1000|0,b=(n/100|0)%10,c=(n/10|0)%10,d=n%10;return(a?(a>1?kd[a]:"")+"千":"")+(b?(b>1?kd[b]:"")+"百":"")+(c?(c>1?kd[c]:"")+"十":"")+(d?kd[d]:"")};
+const kj=n=>{if(!n)return"零";const o=n/1e8|0,m=(n/1e4|0)%1e4,r=n%1e4;return(o?j4(o)+"億":"")+(m?j4(m)+"万":"")+j4(r)};
+const yo=s=>s.replace(/よん$/,"よ");
+const H="あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ";
+const R="a i u e o ka ki ku ke ko sa shi su se so ta chi tsu te to na ni nu ne no ha hi fu he ho ma mi mu me mo ya yu yo ra ri ru re ro wa o n ga gi gu ge go za ji zu ze zo da ji zu de do ba bi bu be bo pa pi pu pe po".split(" ");
+function ro(t){const s=[...t].map(c=>c>="ァ"&&c<="ヶ"?String.fromCharCode(c.charCodeAt(0)-96):c);let o="",g=0;
+ for(let i=0;i<s.length;i++){const c=s[i];if(c=="っ"){g=1;continue}if(c=="ー"){o+=o.slice(-1);continue}
+  const j=H.indexOf(c);if(j<0){o+=c;continue}let r=R[j];const y="ゃゅょ".indexOf(s[i+1]);
+  if(y>=0){const v="auo"[y];r=["shi","chi","ji"].includes(r)?r.slice(0,-1)+v:r.slice(0,-1)+"y"+v;i++}
+  if(c=="ん"&&"あいうえおやゆよ".includes(s[i+1]||"-"))r="n'";
+  if(g){r=(r[0]=="c"?"t":r[0])+r;g=0}o+=r}
+ return o.replace(/。/g,".").replace(/、/g,",").replace(/？/g,"?").replace(/！/g,"!").replace(/〜/g,"~").replace(/ +/g," ").trim()}
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const JW=t=>String(t).replace(/[\u3040-\u30ff\u3400-\u9fff々〜～ー・]+/g,'<span class="jp">$&</span>');
+const MES=["","enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],WES=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+const WK=["にちようび","げつようび","かようび","すいようび","もくようび","きんようび","どようび"],WJ="日月火水木金土";
+// ===== secciones: [título,{cat:[título,patrón]},patrón general]
+const S={
+n:["Números",{b:["0–10","<b>Patrón:</b> la base de todo. <span class='w'>Borde:</span> 0, 4, 7 y 9 tienen dos lecturas (ぜろ/れい, よん/し, なな/しち, きゅう/く)."],t:["11–99","<b>Patrón:</b> 11–19 = 十 + unidad (じゅういち); 20–99 = decena + 十 + unidad (にじゅうさん)."],h:["Centenas","<b>Patrón:</b> unidad + 百, y 100 es ひゃく (sin いち). <span class='w'>Bordes:</span> 300 さんびゃく, 600 ろっぴゃく, 800 はっぴゃく."],th:["Miles","<b>Patrón:</b> unidad + 千; 1000 es せん. <span class='w'>Bordes:</span> 3000 さんぜん, 8000 はっせん."],g:["Grandes (万・億)","<b>Patrón:</b> se agrupa de 4 en 4 dígitos: 万 = 10⁴, 億 = 10⁸. <span class='w'>Borde:</span> 一万 y 一億 llevan いち obligatorio."],e:["Decimales y %","<b>Patrón:</b> decimal = 点 (てん) y los dígitos se leen uno a uno; fracción = denominador + 分の + numerador (al revés que en español)."],o:["Ordinales","<b>Patrón:</b> 第 + número (formal), número + 番目 (posición), número + 目 (nativo ひとつ目)."]},"Hay dos sistemas: chino-japonés (いち, に…) para casi todo y nativo (ひとつ…) hasta 10."],
+a:["Edades",{n:["0–12 años","<b>Patrón:</b> N + 歳 (さい). <span class='w'>Bordes:</span> 1, 8 y 10 contraen: いっさい, はっさい, じゅっさい."],j:["13–29 años","<b>Patrón:</b> decena + unidad + さい. <span class='w'>Bordes:</span> 18 = じゅうはっさい, 20 = <b>はたち</b>, 21 = にじゅういっさい, 28 = にじゅうはっさい."],a:["30+ años","<b>Patrón:</b> las decenas redondas contraen: さんじゅっさい, よんじゅっさい… <span class='w'>Borde:</span> 100 = ひゃくさい (sin contraer)."],p:["Preguntas y etapas","<b>Patrón:</b> 何歳 (neutral), おいくつ (cortés); 〜代 para décadas de vida (20代)."]},"<b>Regla de edades:</b> si el número termina en 1, 8 o 0 (30, 40…), 歳 se une con っ. Excepción: <b>20 = はたち</b>."],
+k:["Calendario",{w:["Semana","<b>Patrón:</b> elemento + 曜日: 日 sol, 月 luna, 火 fuego, 水 agua, 木 madera, 金 oro, 土 tierra. Todas usan lecturas chinas."],rd:["Ayer, hoy, mañana","<b>Patrón:</b> no se deducen de los kanji; hay que memorizarlas. <span class='w'>Bordes:</span> 今日 きょう, 昨日 きのう, 明日 あした."],rs:["Semanas","<b>Patrón:</b> 先々・先・今・来・再来 + 週. Todo regular excepto 再来週 (さらいしゅう)."],rm:["Meses (relativo)","<b>Patrón:</b> mismo molde: 先々月, 先月, 今月, 来月, 再来月 + げつ."],ry:["Años (relativo)","<b>Patrón:</b> 去年 きょねん, 今年 ことし, 来年 らいねん. <span class='w'>Bordes:</span> 一昨年 おととし y 今年 ことし."],mo:["Meses del año","<b>Patrón:</b> N + 月 (がつ). <span class='w'>Bordes:</span> 4月 しがつ, 7月 しちがつ, 9月 くがつ."],d1:["Días 1–10","<b>Patrón:</b> lecturas nativas, memorizar: ついたち, ふつか, みっか, よっか, いつか, むいか, なのか, ようか, ここのか, とおか. Terminan en か (salvo 1)."],d2:["Días 11–20","<b>Patrón:</b> N + にち. <span class='w'>Bordes:</span> 14 じゅうよっか, 17 じゅうしちにち, 19 じゅうくにち, 20 はつか."],d3:["Días 21–31","<b>Patrón:</b> N + にち. <span class='w'>Bordes:</span> 24 にじゅうよっか, 27 にじゅうしちにち, 29 にじゅうくにち."]},"Calendario: semana, día, mes y año tienen su propio sistema de lecturas."],
+f:["Fecha completa",{fc:["Fecha completa","<b>Orden:</b> año → mes → día (→ día de la semana): <b>2026年11月10日(火)</b>. En español es al revés. Año: número + 年 (2024 = にせんにじゅうよねん, con よ)."],er:["Eras japonesas","<b>Patrón:</b> era + número + 年. 令和 = año − 2018, 平成 = año − 1988, 昭和 = año − 1925. <span class='w'>Borde:</span> el año 1 se dice 元年 (がんねん)."],pr:["Preguntar y hablar","<b>Patrón:</b> いつ (cuándo), 何月何日 (qué fecha), 何曜日 (qué día), 〜から〜まで (de… a…). <span class='w'>Borde:</span> 三日間 = みっかかん."]},"Usa el constructor para ver cualquier fecha en kanji, kana, romaji y español."],
+t:["Hora",{h:["Horas","<b>Patrón:</b> N + 時 (じ). <span class='w'>Bordes:</span> 4時 よじ, 7時 しちじ, 9時 くじ."],m:["Minutos","<b>Patrón:</b> 2, 5, 7, 9 → ふん. 1, 3, 4, 6, 8, 10 → ぷん (1, 6, 8, 10 con っ). <span class='w'>Borde:</span> 4分 = よんぷん; 20分 = にじゅっぷん."],c:["Hora completa","<b>Patrón:</b> hora + minutos: 3時15分 = さんじじゅうごふん. 30 minutos = 半 (はん)."],d:["Duración","<b>Patrón:</b> N + 時間 (じかん), igual que la hora más かん. <span class='w'>Bordes:</span> 4 よじかん, 7 しちじかん, 9 くじかん."]},"Hora = N時 + N分. Duración = N時間 + N分間."],
+x:["Más",{y:["Dinero (円)","<b>Patrón:</b> número + 円 (えん). <span class='w'>Borde:</span> 4円 = よえん (no よんえん), 14円 = じゅうよえん."],q:["Frecuencia y momentos","<b>Patrón:</b> 毎 + unidad = cada…; adverbios de frecuencia. <span class='w'>Bordes:</span> 毎月 まいつき, 毎年 まいとし."],s:["Estaciones","<b>Patrón:</b> cada estación es una palabra nativa de dos moras: はる, なつ, あき, ふゆ."]},"Vocabulario relacionado que aparece junto con números y fechas."],
+v:["Comparar",{},"Tablas para ver lado a lado lo que se confunde."]};
+// ===== datos
+const D=[];const A=(s,c,k,h,m,n,e,eh,t,f)=>D.push({s,c,k,h,m,n,e,eh,t,f:!!f,r:cap(ro(eh))});
+const NN={0:"ぜろ es lo común; れい en ciencia y clima; まる en puntuaciones. Teléfono: ぜろ.",4:"よん (y し). し suena a 死 (muerte). Con 人 時 月 日 円 年 se usa よ.",7:"なな (y しち). しち se mantiene en 7時 y 7月.",9:"きゅう (y く). く aparece en 9時 y 9月.",10:"じゅう. Con contadores: じゅっ (じゅっぷん, じゅっこ).",14:"じゅうよん (y じゅうし). Ojo: 14日 = じゅうよっか; 14円 = じゅうよえん.",17:"じゅうなな (y じゅうしち).",19:"じゅうきゅう (y じゅうく).",100:"ひゃく: no se dice いちひゃく.",300:"3 + 百: la h pasa a び (び = b).",600:"6 + 百: ろっぴゃく (con っ y ぴ).",800:"8 + 百: はっぴゃく (con っ y ぴ).",1000:"せん: いっせん se usa para enfatizar.",3000:"3 + 千: せん pasa a ぜん.",8000:"8 + 千: はっせん (con っ).",10000:"いちまん: aquí いち es obligatorio (en 千, 百, 十 se omite).",100000000:"いちおく: también lleva いち obligatorio."};
+const NF=new Set([0,4,7,9,300,600,800,3000,8000,10000,100000000]);
+const nc=(c,n)=>{const d={b:"Memoriza la base: todos los demás números se construyen con ella.",t:"Decena × 十 + unidad.",h:"Unidad + ひゃく.",th:"Unidad + せん.",g:"Se agrupa de 4 en 4 dígitos (万, 億)."};return NN[n]||d[c]};
+const nex=(n)=>n>=100&&n%10==0?[n.toLocaleString("en-US")+"円です。","これ わ "+kn(n," ")+" えん です。","Esto cuesta "+n.toLocaleString("es-CL")+" yenes."]:["番号は"+n+"です。","ばんごう わ "+kn(n," ")+" です。","El número es "+n+"."];
+const AN=(c,n,x)=>A("n",c,n.toLocaleString("en-US"),kn(n),n.toLocaleString("es-CL"),"<b>Kanji:</b> "+kj(n)+". "+nc(c,n),...nex(n),NF.has(n));
+const ZZ=(c,n,x)=>{const e=nex(n);A("n",c,n.toLocaleString("en-US"),kn(n),n.toLocaleString("es-CL"),"<b>Kanji:</b> "+kj(n)+". "+nc(c,n),e[0],e[1],e[2],NF.has(n));D[D.length-1].hs=kn(n," ")};
+[0,1,2,3,4,5,6,7,8,9,10].forEach(n=>ZZ("b",n));
+[11,12,13,14,15,16,17,18,19,20,21,30,40,50,60,70,80,90,99].forEach(n=>ZZ("t",n));
+for(let i=1;i<10;i++)ZZ("h",i*100);
+[1000,2000,3000,4000,5000,6000,7000,8000,9000,1234,2026].forEach(n=>ZZ("th",n));
+[10000,20000,100000,1000000,10000000,100000000].forEach(n=>ZZ("g",n));
+// edades
+const age=n=>{if(n==20)return"はたち";let b=kn(n);if(n==100)return b+"さい";const d=n%10;if(d==1)b=b.replace(/いち$/,"いっ");else if(d==8)b=b.replace(/はち$/,"はっ");else if(d==0&&n>0)b=b.replace(/じゅう$/,"じゅっ");return b+"さい"};
+const AGN={0:"ぜろさい (れいさい). A los bebés se les dice 赤ちゃん; el mes de vida: 生後〜か月.",1:"いっさい: 1 + 歳 contrae (いち → いっ).",8:"はっさい: 8 + 歳 contrae (はち → はっ).",10:"じゅっさい (también じっさい).",11:"じゅういっさい: igual que 1, la contracción vuelve en cada ...1.",18:"<b>Caso borde:</b> じゅうはっさい (no じゅうはちさい). La contracción de 8 aparece también tras 十.",20:"<b>はたち:</b> lectura nativa e irregular, solo para 20 años. 二十歳 se lee はたち; にじゅっさい se entiende pero no es lo normal.",21:"にじゅういっさい: desde 21 vuelve la regla normal (1 → いっ).",28:"にじゅうはっさい: 8 contrae igual que en 18.",30:"さんじゅっさい (también さんじっさい): las decenas redondas contraen.",100:"ひゃくさい: 100 es la excepción; no contrae."};
+const agc=n=>n<=12?"n":n<=29?"j":"a";
+[...Array(13).keys(),...[13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30].slice(),40,50,60,70,80,90,99,100].filter((v,i,a)=>a.indexOf(v)==i).forEach(n=>{const h=age(n);A("a",agc(n),n+"歳",h,n+" años",AGN[n]||"Regular: "+kn(n)+" + さい. <b>Kanji:</b> "+kj(n)+"歳.","私は"+n+"歳です。","わたし わ "+h+" です。","Tengo "+n+" años.",n==20||h!=kn(n)+"さい")});
+// calendario generado
+const mo=n=>n==4?"しがつ":n==7?"しちがつ":n==9?"くがつ":kn(n)+"がつ";
+[...Array(12).keys()].forEach(i=>{const n=i+1;A("k","mo",n+"月",mo(n),MES[n],"<b>Kanji:</b> "+kj(n)+"月. "+(n==4?"Se lee し, nunca よんがつ.":n==7?"Se lee しち, no ななつき.":n==9?"Se lee く, no きゅうがつ.":n==10?"じゅうがつ (no じゅっがつ).":"Regular: "+kn(n)+" + がつ."),"誕生日は"+n+"月です。","たんじょうび わ "+mo(n)+" です。","Mi cumpleaños es en "+MES[n]+".",[4,7,9].includes(n))});
+const NV=["","ついたち","ふつか","みっか","よっか","いつか","むいか","なのか","ようか","ここのか","とおか"];
+const dy=n=>n<=10?NV[n]:n==14?"じゅうよっか":n==24?"にじゅうよっか":n==20?"はつか":n==17||n==27?kn(n)+"にち":(n==19||n==29)?kn(n).replace(/きゅう$/,"く")+"にち":kn(n)+"にち";
+const DN={1:"<b>ついたち</b>: irregular. 一日 como 'un día' es いちにち.",4:"よっか. Se repite en 14 y 24.",7:"なのか (no しちにち). 17 y 27 sí usan しち.",9:"ここのか.",10:"とおか: como el contador 'とお'.",14:"Excepción: conserva よっか (no じゅうよんにち).",17:"Excepción: しち (no なな).",19:"Excepción: く (no きゅう).",20:"<b>はつか</b>: irregular. ≠ 二十歳 (はたち, edad).",24:"Excepción: conserva よっか.",27:"Excepción: しち.",29:"Excepción: く."};
+for(let n=1;n<=31;n++){const c=n<=10?"d1":n<=20?"d2":"d3";A("k",c,n+"日",dy(n),"día "+n,DN[n]||(n<=10?"Lectura nativa (memorizar).":"Regular: "+kn(n)+" + にち."),"今日は"+n+"日です。","きょう わ "+dy(n)+" です。","Hoy es el "+n+".",[1,14,17,19,20,24,27,29].includes(n))}
+// fecha completa
+const yr=y=>yo(kn(y))+"ねん";
+const FD=(y,m,d,n,f)=>{const h=yr(y)+mo(m)+dy(d),k=y+"年"+m+"月"+d+"日";A("f","fc",k,h,d+" de "+MES[m]+" de "+y,n,"誕生日は"+k+"です。","たんじょうび わ "+yo(kn(y," "))+" ねん "+mo(m)+" "+dy(d)+" です。","Mi cumpleaños es el "+d+" de "+MES[m]+" de "+y+".",f);D[D.length-1].hs=yo(kn(y," "))+" ねん "+mo(m)+" "+dy(d)};
+FD(2026,11,10,"Hoy. Año: にせんにじゅうろくねん. Orden: año → mes → día.",0);
+FD(2000,1,1,"<b>2000 = にせん</b> (sin いち). Día 1 = ついたち.",1);
+FD(1994,4,14,"Triple borde: 1994 termina en 4 (よねん), 4月 しがつ y 14日 じゅうよっか.",1);
+FD(2007,7,7,"Tanabata. 7月 しちがつ y 7日 なのか; el año 2007 se lee ななねん o しちねん.",1);
+FD(2019,9,19,"9 se lee く en 9月 y 19日 (じゅうくにち).",1);
+FD(2020,2,20,"20日 = はつか (ojo: no es はたち).",1);
+FD(2024,4,24,"Todo irregular: 2024 よねん, しがつ, にじゅうよっか.",1);
+FD(2030,12,31,"Regular salvo el cierre: 31日 = さんじゅういちにち.",0);
+// hora
+const hr=n=>n==4?"よじ":n==7?"しちじ":n==9?"くじ":kn(n)+"じ";
+const mn=n=>{let b=kn(n),d=n%10;if(d==0)return b.replace(/じゅう$/,"じゅっ")+"ぷん";if(d==1)return b.replace(/いち$/,"いっ")+"ぷん";if(d==6)return b.replace(/ろく$/,"ろっ")+"ぷん";if(d==8)return b.replace(/はち$/,"はっ")+"ぷん";return b+([3,4].includes(d)?"ぷん":"ふん")};
+for(let n=1;n<=12;n++)A("t","h",n+"時",hr(n),n+":00","<b>Kanji:</b> "+kj(n)+"時. "+(n==4?"よじ, nunca よんじ.":n==7?"しちじ, no ななじ.":n==9?"くじ, no きゅうじ.":"Regular: "+kn(n)+" + じ."),"今、"+n+"時です。","いま、 "+hr(n)+" です。","Son las "+n+".",[4,7,9].includes(n));
+[1,2,3,4,5,6,7,8,9,10,15,20,30,45].forEach(n=>{const h=mn(n);A("t","m",n+"分",h,n+" minutos",n==4?"<b>よんぷん</b>: aquí 4 es よん y sufijo ぷん (≠ よじ).":n==20?"にじゅっぷん (también にじっぷん): decena redonda contrae.":n==10?"じゅっぷん (también じっぷん).":n==15?"じゅうごふん: 5 → ふん.":n==45?"よんじゅうごふん: 5 → ふん.":n==30?"Se suele decir 半 (はん).":[1,6,8].includes(n)?"Contrae: "+h.slice(0,-2)+" + ぷん.":[3].includes(n)?"3 → ぷん.":"2, 5, 7, 9 → ふん.","あと"+n+"分です。","あと "+h+" です。","Faltan "+n+" minutos.",h.includes("っ")||n==4)});
+[[3,15],[4,4],[7,30],[9,45],[10,10],[1,6],[8,8],[12,20]].forEach(([a,b])=>{const h=hr(a)+(b==30?"はん":mn(b));A("t","c",a+"時"+b+"分",h,a+":"+String(b).padStart(2,"0"),"Se compone: "+hr(a)+" + "+(b==30?"はん":mn(b))+(a==4?" (よじ).":"")+(b==4||b==6||b==8||b==10||b==20?" Ojo con la contracción de minutos.":""),a+"時"+b+"分に会う。",hr(a)+" "+(b==30?"はん":mn(b))+" に あう。","Nos vemos a las "+a+":"+String(b).padStart(2,"0")+".",a==4||b==4||b==6||b==8||b==10);D[D.length-1].hs=hr(a)+" "+(b==30?"はん":mn(b))});
+[1,2,3,4,5,7,9,10,12,24].forEach(n=>{const h=hr(n).replace(/じ$/,"じかん");A("t","d",n+"時間",h,n+" horas (duración)",n==4?"よじかん: igual que 4時 más かん.":n==7?"しちじかん (también ななじかん).":n==9?"くじかん.":"Regular: hora + かん.","毎日"+n+"時間勉強する。","まいにち "+h+" べんきょう する。","Estudio "+n+" horas al día.",[4,7,9].includes(n))});
+// dinero
+[1,4,5,10,14,50,100,500,1000,10000].forEach(n=>{const h=yo(kn(n))+"えん";A("x","y",n.toLocaleString("en-US")+"円",h,n.toLocaleString("es-CL")+" yenes",n==4?"<b>よえん</b>: 4 + 円 pierde la ん.":n==14?"じゅうよえん: igual que 4円.":n==100?"ひゃくえん.":n==10000?"いちまんえん (いち obligatorio).":"Regular: "+kn(n)+" + えん.","これは"+n.toLocaleString("en-US")+"円です。","これ わ "+h+" です。","Esto cuesta "+n.toLocaleString("es-CL")+" yenes.",n==4||n==14)});
+// hand rows: cat|k|h|m|n|e|eh|t|flag
+const RAW=`n|e|〇・五|れいてんご|0,5|Decimal: 点 (てん). 0 = れい (no ぜろ) aquí; 5 se dice ご.|〇・五をください。|れいてんご を ください。|Deme 0,5.|!
+n|e|三・一四|さんてんいちよん|3,14|Tras 点 cada dígito se lee por separado: 一 いち, 四 よん.|円周率は三・一四です。|えんしゅうりつ わ さんてんいちよん です。|Pi es 3,14.
+n|e|二分の一|にぶんのいち|1/2|Orden inverso al español: "de 2 partes, 1".|二分の一ください。|にぶん の いち ください。|Medio, por favor.|!
+n|e|三分の二|さんぶんのに|2/3|Denominador + 分の + numerador. 3 + 分 = さんぶん.|三分の二は終わった。|さんぶん の に わ おわった。|Dos tercios terminaron.|!
+n|e|五十パーセント|ごじゅっパーセント|50%|50 + %: じゅう contrae a じゅっ ante パ.|五十%の割引。|ごじゅっ パーセント の わりびき。|50% de descuento.|!
+n|e|百パーセント|ひゃくパーセント|100%|Regular: 百 + パーセント.|百%です。|ひゃく パーセント です。|Es 100%.
+n|e|一・五倍|いってんごばい|1,5 veces|倍 (ばい): 1 = いち, aquí 一 se contrae a いっ.|一・五倍です。|いってんご ばい です。|Es 1,5 veces.|!
+n|o|第一|だいいち|primero (formal)|第 + número: 第一, 第二, 第三… Muy formal o escrito.|第一回です。|だいいっかい です。|Es la primera vez.
+n|o|一番目|いちばんめ|el primero (posición)|Número + 番目. Se dice también 一番 (いちばん = "el mejor").|一番目に座る。|いちばんめ に すわる。|Me siento en el primero.
+n|o|二つ目|ふたつめ|el segundo|Nativo + め: ひとつめ, ふたつめ, みっつめ…|二つ目をください。|ふたつめ を ください。|Deme el segundo.
+n|o|初めて|はじめて|por primera vez|No es 一番目: es "por primera vez".|初めて日本へ来た。|はじめて にほん え きた。|Vine a Japón por primera vez.
+a|p|何歳|なんさい|¿cuántos años?|何 + 歳 = なんさい. Neutral y común.|何歳ですか。|なんさい です か。|¿Cuántos años tienes?
+a|p|おいくつ|おいくつ|¿cuántos años? (cortés)|Más educado que 何歳; se usa con mayores o clientes.|おいくつですか。|おいくつ です か。|¿Qué edad tiene?
+a|p|二十代|にじゅうだい|veintes (década de edad)|N + 代 (だい): 20代, 30代… 20代 に NO usa はたち.|二十代です。|にじゅうだい です。|Tengo veintitantos.
+a|p|赤ちゃん|あかちゃん|bebé|Etapa de vida; 0 años.|赤ちゃんが泣く。|あかちゃん が なく。|El bebé llora.
+a|p|子供|こども|niño|供 se lee ども aquí.|子供が二人。|こども が ふたり。|Dos niños.
+a|p|成人|せいじん|adulto, mayoría de edad|Mayoría de edad civil: 18 años (desde 2022). La ceremonia de 二十歳 sigue.|成人です。|せいじん です。|Soy adulto.
+a|p|年上|としうえ|mayor que (en edad)|年上 / 年下 (としした, menor).|二つ年上です。|ふたつ としうえ です。|Soy dos años mayor.
+a|p|同い年|おないどし|misma edad|Lectura irregular: 同 = おな.|同い年だね。|おないどし だね。|Tenemos la misma edad.|!
+k|w|日曜日|にちようび|domingo|日 = sol. Lecturas chinas: にち.|日曜日は休み。|にちようび わ やすみ。|El domingo descanso.
+k|w|月曜日|げつようび|lunes|月 = luna. げつ (no つき).|月曜日は忙しい。|げつようび わ いそがしい。|El lunes estoy ocupado.
+k|w|火曜日|かようび|martes|火 = fuego. か (no ひ).|火曜日に会う。|かようび に あう。|Nos vemos el martes.
+k|w|水曜日|すいようび|miércoles|水 = agua. すい (no みず).|水曜日は休み。|すいようび わ やすみ。|El miércoles es feriado.
+k|w|木曜日|もくようび|jueves|木 = madera. もく.|木曜日に行く。|もくようび に いく。|Voy el jueves.
+k|w|金曜日|きんようび|viernes|金 = oro. きん.|金曜日は早く帰る。|きんようび わ はやく かえる。|El viernes vuelvo temprano.
+k|w|土曜日|どようび|sábado|土 = tierra. ど.|土曜日に遊ぶ。|どようび に あそぶ。|El sábado salimos.
+k|w|何曜日|なんようび|¿qué día de la semana?|何 + 曜日.|今日は何曜日ですか。|きょう わ なんようび です か。|¿Qué día es hoy?
+k|rd|一昨日|おととい|anteayer|Lectura especial. También おとつい.|おととい会った。|おととい あった。|Nos vimos anteayer.|!
+k|rd|昨日|きのう|ayer|Lectura especial.|昨日は雨だった。|きのう わ あめ だった。|Ayer llovió.|!
+k|rd|今日|きょう|hoy|Lectura especial. 今日は (こんにちは) = "hola".|今日は暑い。|きょう わ あつい。|Hoy hace calor.|!
+k|rd|明日|あした|mañana|También あす (escrito) y みょうにち (muy formal).|明日行く。|あした いく。|Mañana voy.|!
+k|rd|明後日|あさって|pasado mañana|Lectura especial.|明後日会おう。|あさって あおう。|Nos vemos pasado mañana.|!
+k|rd|今朝|けさ|esta mañana|Lectura especial.|今朝は寒い。|けさ わ さむい。|Esta mañana hace frío.|!
+k|rd|今晩|こんばん|esta noche (tarde-noche)|Regular. こんばんは = "buenas noches".|今晩は暇だ。|こんばん わ ひま だ。|Esta noche estoy libre.
+k|rd|今夜|こんや|esta noche|Algo más tardío que 今晩.|今夜は寒い。|こんや わ さむい。|Esta noche hace frío.|!
+k|rd|昨夜|ゆうべ|anoche|Lectura especial. También さくや (escrito).|昨夜は寝た。|ゆうべ わ ねた。|Anoche dormí.|!
+k|rs|先々週|せんせんしゅう|hace dos semanas|先々 = antes de antes.|先々週は旅行した。|せんせんしゅう わ りょこう した。|Hace dos semanas viajé.
+k|rs|先週|せんしゅう|la semana pasada|先 = anterior.|先週は忙しかった。|せんしゅう わ いそがしかった。|La semana pasada estuve ocupado.
+k|rs|今週|こんしゅう|esta semana|今 = este.|今週は暇だ。|こんしゅう わ ひま だ。|Esta semana estoy libre.
+k|rs|来週|らいしゅう|la próxima semana|来 = que viene.|来週行く。|らいしゅう いく。|Voy la próxima semana.
+k|rs|再来週|さらいしゅう|en dos semanas|再来 se lee さらい (irregular).|再来週会う。|さらいしゅう あう。|Nos vemos en dos semanas.|!
+k|rs|週末|しゅうまつ|fin de semana|週 + 末 (final).|週末は休み。|しゅうまつ わ やすみ。|El fin de semana descanso.
+k|rs|平日|へいじつ|día entre semana|平 se lee へい; 日 se lee じつ.|平日は働く。|へいじつ わ はたらく。|Entre semana trabajo.|!
+k|rm|先々月|せんせんげつ|hace dos meses|Mismo molde que semanas.|先々月に来た。|せんせんげつ に きた。|Vine hace dos meses.
+k|rm|先月|せんげつ|el mes pasado|先 + 月 (げつ).|先月は寒かった。|せんげつ わ さむかった。|El mes pasado hizo frío.
+k|rm|今月|こんげつ|este mes|今 + 月 (げつ).|今月は忙しい。|こんげつ わ いそがしい。|Este mes estoy ocupado.
+k|rm|来月|らいげつ|el próximo mes|来 + 月 (げつ).|来月行く。|らいげつ いく。|Voy el próximo mes.
+k|rm|再来月|さらいげつ|en dos meses|再来 = さらい.|再来月会う。|さらいげつ あう。|Nos vemos en dos meses.|!
+k|ry|一昨年|おととし|hace dos años|Lectura especial (≠ おととい).|一昨年は日本にいた。|おととし わ にほん に いた。|Hace dos años estaba en Japón.|!
+k|ry|去年|きょねん|el año pasado|去 = pasado. Cotidiano. 昨年 (さくねん) es formal.|去年は暑かった。|きょねん わ あつかった。|El año pasado hizo calor.
+k|ry|昨年|さくねん|el año pasado (formal)|Registro formal/escrito.|昨年入社した。|さくねん にゅうしゃ した。|Ingresé a la empresa el año pasado.
+k|ry|今年|ことし|este año|Irregular (no こんねん).|今年は忙しい。|ことし わ いそがしい。|Este año estoy ocupado.|!
+k|ry|来年|らいねん|el próximo año|Regular: 来 + 年.|来年日本へ行く。|らいねん にほん え いく。|El próximo año voy a Japón.
+k|ry|再来年|さらいねん|en dos años|再来 = さらい.|再来年卒業する。|さらいねん そつぎょう する。|Me gradúo en dos años.|!
+f|er|令和|れいわ|era Reiwa (2019–)|令和8年 = 2026. Año occidental − 2018.|令和八年です。|れいわ はちねん です。|Es el año 8 de Reiwa.
+f|er|平成|へいせい|era Heisei (1989–2019)|平成 = año occidental − 1988.|平成三十年|へいせい さんじゅうねん|Heisei 30 (2018)
+f|er|昭和|しょうわ|era Shōwa (1926–1989)|昭和 = año occidental − 1925.|昭和六十四年|しょうわ ろくじゅうよねん|Shōwa 64 (1989)
+f|er|大正|たいしょう|era Taishō (1912–1926)|大正 = año occidental − 1911.|大正時代|たいしょう じだい|Época Taishō
+f|er|明治|めいじ|era Meiji (1868–1912)|明治 = año occidental − 1867.|明治時代|めいじ じだい|Época Meiji
+f|er|元年|がんねん|año 1 de una era|<b>Caso borde:</b> el primer año no es いちねん sino がんねん.|令和元年|れいわ がんねん|Año 1 de Reiwa (2019)|!
+f|er|西暦|せいれき|calendario occidental|Se usa 西暦2026年 para distinguir de las eras.|西暦二〇二六年|せいれき にせんにじゅうろくねん|Año 2026 d. C.
+f|pr|何月何日|なんがつなんにち|¿qué fecha?|Mes + día. Respuesta: N月N日.|今日は何月何日ですか。|きょう わ なんがつ なんにち です か。|¿Qué fecha es hoy?
+f|pr|いつ|いつ|¿cuándo?|Pregunta general. Sin partícula antes de いつ.|誕生日はいつですか。|たんじょうび わ いつ です か。|¿Cuándo es tu cumpleaños?
+f|pr|〜から〜まで|から・まで|desde… hasta…|から = desde; まで = hasta.|一月から三月まで。|いちがつ から さんがつ まで。|De enero a marzo.
+f|pr|三日間|みっかかん|tres días (duración)|<b>Borde:</b> 1–10 nativos + かん: ふつかかん, みっかかん, とおかかん. Desde 11: じゅういちにちかん.|三日間休む。|みっかかん やすむ。|Descanso tres días.|!
+f|pr|二日前|ふつかまえ|hace dos días|Número de días + 前 (antes) / 後 (después).|二日前に着いた。|ふつかまえ に ついた。|Llegué hace dos días.
+f|pr|二年後|にねんご|dentro de dos años|Número + 後 (ご). 二年 = にねん.|二年後に行く。|にねんご に いく。|Voy dentro de dos años.
+x|q|毎日|まいにち|todos los días|毎 = cada.|毎日走る。|まいにち はしる。|Corro todos los días.
+x|q|毎週|まいしゅう|cada semana|毎 + 週.|毎週会う。|まいしゅう あう。|Nos vemos cada semana.
+x|q|毎月|まいつき|cada mes|<b>Borde:</b> まいつき (no まいげつ).|毎月払う。|まいつき はらう。|Pago cada mes.|!
+x|q|毎年|まいとし|cada año|También まいねん. まいとし es más cotidiano.|毎年旅行する。|まいとし りょこう する。|Viajo cada año.|!
+x|q|朝|あさ|mañana (parte del día)|朝・昼・夜.|朝六時に起きる。|あさ ろくじ に おきる。|Me levanto a las seis de la mañana.
+x|q|昼|ひる|mediodía|También almuerzo: 昼ご飯.|昼に食べる。|ひる に たべる。|Como al mediodía.
+x|q|夜|よる|noche|夜 に.|夜は寒い。|よる わ さむい。|De noche hace frío.
+x|q|いつも|いつも|siempre|Frecuencia 100%.|いつも元気です。|いつも げんき です。|Siempre estoy bien.
+x|q|ときどき|ときどき|a veces|時々 en kanji.|ときどき行く。|ときどき いく。|A veces voy.
+x|s|春|はる|primavera|En Japón: marzo–mayo.|春は暖かい。|はる わ あたたかい。|La primavera es cálida.
+x|s|夏|なつ|verano|En Japón: junio–agosto.|夏は暑い。|なつ わ あつい。|El verano es caluroso.
+x|s|秋|あき|otoño|En Japón: septiembre–noviembre.|秋は涼しい。|あき わ すずしい。|El otoño es fresco.
+x|s|冬|ふゆ|invierno|En Japón: diciembre–febrero.|冬は寒い。|ふゆ わ さむい。|El invierno es frío.`;
+RAW.split("\n").forEach(l=>{const a=l.split("|");A(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]=="!")});
+// ===== comparaciones
+const T=[
+["El 4, el 7 y el 9 en cada contexto",["Contexto","4","7","9"],[["人 personas","よにん","ななにん／しちにん","きゅうにん／くにん"],["時 hora","よじ","しちじ","くじ"],["月 mes","しがつ","しちがつ","くがつ"],["日 día","よっか","なのか","ここのか"],["分 minutos","よんぷん","ななふん","きゅうふん"],["歳 edad","よんさい","ななさい","きゅうさい"],["円 yen","よえん","ななえん","きゅうえん"],["年 años","よねん","しちねん／ななねん","くねん／きゅうねん"],["回 veces","よんかい","ななかい","きゅうかい"],["本 largos","よんほん","ななほん","きゅうほん"]],"Las celdas en naranja no empiezan con よん / なな / きゅう: son los casos borde."],
+["1, 6, 8 y 10: cuándo se contrae (っ)",["Contador","1","6","8","10"],[["歳 edad","いっさい","ろくさい","はっさい","じゅっさい"],["分 minutos","いっぷん","ろっぷん","はっぷん","じゅっぷん"],["回 veces","いっかい","ろっかい","はっかい","じゅっかい"],["本 largos","いっぽん","ろっぽん","はっぽん","じゅっぽん"],["匹 animales","いっぴき","ろっぴき","はっぴき","じゅっぴき"],["個 pequeños","いっこ","ろっこ","はっこ","じゅっこ"],["冊 libros","いっさつ","ろくさつ","はっさつ","じゅっさつ"],["か月 meses","いっかげつ","ろっかげつ","はっかげつ","じゅっかげつ"]],"Regla: 1, 8 y 10 contraen casi siempre; 6 contrae solo con か, ぱ-fila y ぽ (ろっかい, ろっぽん) pero no con さい, さつ."],
+["Prefijos de tiempo × unidad",["","日","週","月","年"],[["anteayer / hace 2","おととい","せんせんしゅう","せんせんげつ","おととし"],["pasado","きのう","せんしゅう","せんげつ","きょねん"],["actual","きょう","こんしゅう","こんげつ","ことし"],["siguiente","あした","らいしゅう","らいげつ","らいねん"],["en 2 (pasado mañana)","あさって","さらいしゅう","さらいげつ","さらいねん"]],"Solo la columna 日 y la de 年 son irregulares; semana y mes usan lecturas chinas regulares."],
+["Pares que se confunden",["Qué se compara","Forma A","Forma B","Clave"],[["Día 20 vs 20 años","二十日 はつか","二十歳 はたち","Ambos irregulares; はつか fecha, はたち edad."],["Día 1 vs un día","一日 ついたち","一日 いちにち","ついたち = día 1; いちにち = un día entero."],["Hora vs duración","四時 よじ","四時間 よじかん","Solo se agrega かん."],["Piso vs veces","三階 さんがい","三回 さんかい","が vs か."],["Mes vs duración","一月 いちがつ","一か月 いっかげつ","がつ = mes; かげつ = duración."],["Edad vs años","一歳 いっさい","一年 いちねん","歳 = edad; 年 = año o duración."],["Mañana","明日 あした","明日 あす／みょうにち","Cotidiano / escrito / muy formal."],["Personas","一人 ひとり","一名 いちめい","人 general; 名 formal."],["Este año / este mes","今年 ことし","今月 こんげつ","今年 es irregular; 今月 regular."],["Cada mes / cada año","毎月 まいつき","毎年 まいとし","Ambos con lectura nativa (つき, とし)."]],"Mismo kanji, lectura distinta, o una letra de diferencia."]];
+// ===== motor
+const $=id=>document.getElementById(id);let sec="n",cur="all";
+const grp=()=>D.filter(d=>d.s==sec&&(cur=="all"||d.c==cur));
+function ctor(){let y=+$("cy").value||2026,m=Math.min(12,Math.max(1,+$("cm").value||1)),d=+$("cd").value||1;y=Math.min(2999,Math.max(1000,y));d=Math.min(d,new Date(Date.UTC(y,m,0)).getUTCDate());
+ const w=new Date(Date.UTC(y,m-1,d)).getUTCDay(),k=y+"年"+m+"月"+d+"日（"+WJ[w]+"曜日）",h=yr(y)+mo(m)+dy(d)+"、"+WK[w];
+ let e="";const em=(n,nm,rd)=>nm+(n==1?"元":n)+"年 ("+rd+(n==1?"がん":kn(n))+"ねん)";
+ if(y>2019||(y==2019&&m>=5))e=em(y-2018,"令和","れいわ ");else if(y>=1989)e=em(y-1988,"平成","へいせい ");else if(y>=1927)e=em(y-1925,"昭和","しょうわ ");
+ $("cout").innerHTML=`<div class="big jp">${k}</div><div class="jp" style="color:var(--red);font-size:1.15rem">${h}</div><i>${cap(ro(yo(kn(y," "))+" ねん "+mo(m)+" "+dy(d)+", "+WK[w]))}</i><br><b>${WES[w][0].toUpperCase()+WES[w].slice(1)}, ${d} de ${MES[m]} de ${y}</b><br>${e?JW(e)+" · ":""}<span class="w" style="color:var(--warn)">${[yr(y).includes("よね")?"año con よ":"",[4,7,9].includes(m)?"mes irregular":"",[1,14,17,19,20,24,27,29].includes(d)?"día irregular":""].filter(Boolean).join(" · ")}</span>`}
+function tbl(){return T.map(([t,c,r,n])=>{const b={1:"よん",2:"なな",3:"きゅう"};return`<div class="box"><h3>${t}</h3><div class="tw"><table><tr>${c.map(x=>`<th>${JW(x)}</th>`).join("")}</tr>${r.map(x=>`<tr>${x.map((y,i)=>`<td class="jp ${t[0]=="E"&&i&&!y.startsWith(b[i])?"x":""}">${y}</td>`).join("")}</tr>`).join("")}</table></div><p class="cnt">${JW(n)}</p></div>`}).join("")}
+function render(){
+ const v=sec=="v",f=sec=="f";
+ $("sn").innerHTML=Object.entries(S).map(([k,x])=>`<button class="f sc ${k==sec?"on":""}" data-s="${k}">${x[0]}</button>`).join("");
+ $("nav").hidden=v;$("qb").hidden=v;$("grid").hidden=v;$("cmp").hidden=!v;$("ctor").hidden=!f;
+ $("nav").innerHTML=[["all","Todos"],...Object.entries(S[sec][1]).map(([k,x])=>[k,x[0]])].map(([k,t])=>`<button class="f ${k==cur?"on":""}" data-v="${k}">${t}</button>`).join("");
+ document.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{sec=b.dataset.s;cur="all";render()});
+ document.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{cur=b.dataset.v;render()});
+ $("pat").innerHTML=JW(cur=="all"||v?S[sec][2]:S[sec][1][cur][1]);
+ if(v){$("cmp").innerHTML=tbl();$("cnt").textContent="";return}
+ if(f&&!$("cy").value){const n=new Date();$("cy").value=n.getFullYear();$("cm").value=n.getMonth()+1;$("cd").value=n.getDate()}
+ if(f)ctor();
+ const g=grp(),name=cur=="all"?"Todos":S[sec][1][cur][0];
+ $("qb").textContent="Quiz · "+S[sec][0]+" · "+name;
+ $("cnt").textContent=g.length+" tarjetas · "+g.filter(d=>d.f).length+" casos borde ⚠";
+ $("grid").innerHTML=g.map(d=>`<div class="c ${d.f?"w":""}"><div class="in"><div class="s fr"><div><b class="jp">${d.k}</b><div class="h jp">${d.h}</div><div class="cnt"><i>${ro(d.hs||d.h)}</i></div><small>${d.m}</small>${d.f?'<span class="bd">⚠ caso borde</span>':""}</div></div>
+ <div class="s bk"><p><b class="jp" style="font-size:1.4rem;color:var(--red)">${d.k}</b> <span class="jp">${d.h}</span> <i>(${ro(d.h)})</i><br><b>${d.m}</b> ${d.f?'<span class="bd">⚠ borde</span>':""}</p>
+ <p><span class="lb">PATRÓN / NOTA</span><br>${JW(d.n)}</p><p><span class="lb">EJEMPLO</span><br><span class="ex jp">${d.e}</span><br><i>${d.r}</i><br>${d.t}</p></div></div></div>`).join("");
+ document.querySelectorAll(".c").forEach(c=>c.onclick=()=>c.classList.toggle("fl"));
+}
+["cy","cm","cd"].forEach(i=>$(i).oninput=ctor);
+$("ct").onclick=()=>{const n=new Date();$("cy").value=n.getFullYear();$("cm").value=n.getMonth()+1;$("cd").value=n.getDate();ctor()};
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+let Q=[],i=0,sc=0;
+$("qb").onclick=()=>{Q=shuf(grp()).slice(0,10);i=0;sc=0;$("home").hidden=true;$("quiz").hidden=false;ask()};
+function ask(){
+ const q=Q[i],pool=D.filter(d=>d.s==sec&&d!=q),cand=[...shuf(pool.filter(d=>d.c==q.c)),...shuf(pool.filter(d=>d.c!=q.c))];
+ const num=/^[\d\s.,%]+$/.test(q.m),al=[];if(q.h!=q.k)al.push("r");al.push("j");if(!num)al.push("m");
+ const kind=al[i%al.length];let ans,title,show,key;
+ if(kind=="r"){title="¿Cómo se lee?";show=q.k;key=d=>d.h;ans=q.h}
+ else if(kind=="j"){title="¿Cómo se escribe?";show=q.h;key=d=>d.k;ans=q.k}
+ else{title="¿Qué significa?";show=q.k;key=d=>d.m;ans=q.m}
+ const ds=[...new Set(cand.map(key).filter(x=>x!=ans))].slice(0,3),opts=shuf([ans,...ds]);
+ $("quiz").innerHTML=`<div class="cnt">Pregunta ${i+1} de ${Q.length}</div><div class="big jp" style="${show.length>5?"font-size:2.2rem":""}">${show}</div><p>${title}</p>`+opts.map(o=>`<button class="o jp">${o}</button>`).join("")+`<div class="msg" id="msg"></div><div class="cnt" id="nt"></div><button class="q" id="nx" hidden>Siguiente</button>`;
+ document.querySelectorAll(".o").forEach(b=>b.onclick=()=>{
+  const ok=b.textContent==ans;if(ok)sc++;
+  document.querySelectorAll(".o").forEach(x=>{x.disabled=true;if(x.textContent==ans)x.classList.add("ok")});
+  if(!ok)b.classList.add("bad");
+  $("msg").textContent=ok?"✔ ¡Correcto!":"✘ Incorrecto. Respuesta correcta: "+ans;$("msg").style.color=ok?"var(--ok)":"var(--bad)";
+  $("nt").innerHTML=JW(q.n);$("nx").hidden=false;$("nx").textContent=i+1<Q.length?"Siguiente":"Ver puntaje";
+  $("nx").onclick=()=>{i++;i<Q.length?ask():end()};
+ });
+}
+function end(){$("quiz").innerHTML=`<div class="sun">${sc}</div><h2>Puntaje: ${sc} / ${Q.length}</h2><button class="q" id="bk">Volver</button>`;$("bk").onclick=()=>{$("quiz").hidden=true;$("home").hidden=false;render()}}
+render();
+</script></body></html>
